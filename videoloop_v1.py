@@ -18,10 +18,10 @@ else:
 def check_file():
     output = subprocess.check_output('find /media/ | grep .mp4',
                                      shell=True).decode("utf-8")
-    return output.split('\n')[0]
+    return output.split('\n')
 def play_video(input=None):
     if input is not None:
-        play = subprocess.run('omxplayer %s --aspect-mode fill --vol 0 --loop -o hdmi --no-osd' % input, shell=True)
+        play = subprocess.run('omxplayer %s --aspect-mode fill --vol 0 -o hdmi --no-osd' % input, shell=True)
         return play
 
 try:
@@ -30,15 +30,19 @@ try:
 except subprocess.CalledProcessError as error:
     print('Returncode: ', error.returncode)
 if version_check_ok:
-    check = 3
+    user_exit = False
 else:
-    check = 0
+    user_exit = True
+	
+print(video)
 # Infinite Loop for the video, condition triggers when either program fails or user exits by input.
 # Video already loops via omxplayer, this is a failsafe
-while check is not 0:
-    check = play_video(video)
-    if check is 3:
-        user_exit = True
+while not user_exit:
+	for file in video:
+		if file is not '':
+			check = play_video(file)
+			if check is not 0:
+				user_exit = True
     
-# Exit Code = 0
+# Exit Code != 0 --> DEBUG: WHY?
 print(check)
