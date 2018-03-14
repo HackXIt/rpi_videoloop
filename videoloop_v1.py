@@ -3,6 +3,7 @@
 This script loops a video found on attached USB Sticks.
 Rev1: Currently only grabs the first .mp3 file found (Sorted by name)
 Rev2: Restarts loop upon certain exit status (3 = user quit, 1 = failure quit)
+Rev3: Loops through all found files in /media/ sequentially
 """
 # Library imports
 import subprocess, sys
@@ -24,7 +25,7 @@ def check_file():
 
 def play_video(input=None):
     if input is not None:
-        play = subprocess.run('omxplayer %s --aspect-mode fill -o hdmi --no-osd' % input, shell=True)
+        play = subprocess.run('omxplayer --aspect-mode fill -o hdmi --no-osd %s' % input, shell=True)
         return play.returncode
 
 
