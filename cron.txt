@@ -1,0 +1,2 @@
+@reboot /etc/init.d/vid_controller start
+*/5 * * * /etc/init.d/vid_controller repair
