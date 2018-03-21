@@ -1,0 +1,59 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provvides: omxplayer
+# Required-Start:
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Displays videos in a directory in a loop using omxplayer
+# Description:
+### END INIT INFO
+
+# Videolooping Script
+VLSCRIPT="/home/pi/rpi_videoloop/videoloop_v2.sh"
+
+#---- There should be no need to edit anything below this line ----
+
+# Start the videoloop
+case "$1" in start)
+if sudo screen -list | grep -v grep | grep videoloop > /dev/null
+then
+echo "Videoloop is already running"
+else
+sudo screen -d -m -S videoloop sh -c "$VLSCRIPT"
+echo "Videoloop Started"
+fi
+;;
+
+# Stop the videoloop
+stop)
+sudo screen -X quit
+echo "Videoloop Stopped"
+;;
+
+# Returns the status of the videoloop
+check)
+if sudo screen -list | grep -v grep | grep videoloop > /dev/null
+then
+echo "Videoloop is Running"
+else
+echo "Videoloop is Not Running"
+fi
+;;
+
+# Starts the videoloop if it is not running
+repair)
+if !(sudo screen -list | grep -v grep | grep videoloop > /dev/null)
+then
+sudo screen -d -m -S videoloop sh -c "$VLSCRIPT"
+echo "Videoloop Restarted"
+fi
+;;
+*)
+
+echo "Usage: /etc/init.d/vid_controller {start|stop|check|repair}"
+
+exit 1
+
+;;
+esac
