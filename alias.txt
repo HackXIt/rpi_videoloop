@@ -1,0 +1,3 @@
+videoloop() {
+    /etc/init.d/vid_controller $1
+}
