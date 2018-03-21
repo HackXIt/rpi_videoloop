@@ -1,3 +1,5 @@
+#ORIGINAL IDEA SOURCE: https://community.spiceworks.com/how_to/148722-loop-multiple-videos-on-a-raspberry-pi
+
 #!/bin/bash
 ### BEGIN INIT INFO
 # Provvides: omxplayer
