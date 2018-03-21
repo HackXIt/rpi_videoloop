@@ -2,7 +2,7 @@
 
 #!/bin/bash
 ### BEGIN INIT INFO
-# Provvides: omxplayer
+# Provides: omxplayer
 # Required-Start:
 # Required-Stop:
 # Default-Start: 2 3 4 5

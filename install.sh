@@ -19,11 +19,11 @@ fi
 echo "Installing Configurations..."
 
 #Configuring
-mkdir ~/rpi_videoloop
-cp $SCRIPT rpi_videoloop/
+mkdir /home/pi/rpi_videoloop
+cp $SCRIPT /home/pi/rpi_videoloop/
 sudo cp $CONTROLLER /etc/init.d/
 cp $USBCONF /etc/usbmount/
-sudo chmod 755 ~/rpi_videoloop/$SCRIPT
+sudo chmod 755 /home/pi/rpi_videoloop/$SCRIPT
 sudo chmod 755 /etc/init.d/$CONTROLLER
 sudo update-rc.d vid_controller defaults
 sudo echo -n " consoleblank=10" >> /boot/cmdline.txt
