@@ -8,11 +8,11 @@ USBCONF="usbmount.conf"
 CRONSTUFF=$(cat cron.txt)
 
 # Checking | Installing Dependancies
-apt update
 if apt list $DEPENDENCIES | grep installed > /dev/null
 then
 echo "$DEPENDENCIES already installed. Continuing."
 else
+apt-get update
 apt-get install $DEPENDENCIES -y
 fi
 
@@ -27,7 +27,8 @@ sudo chmod 755 /home/pi/rpi_videoloop/$SCRIPT
 sudo chmod 755 /etc/init.d/$CONTROLLER
 sudo update-rc.d vid_controller defaults
 sudo echo -n " consoleblank=10" >> /boot/cmdline.txt
-cat alias.txt >> ~/.bashrc
+#cat alias.txt >> ~/.bashrc
+#sudo cat alias.txt >> ~/.bashrc
 (crontab -u pi -l; echo "$CRONSTUFF" ) | crontab -u pi -
 
-echo "FINISHED INSTALLATION, please test by using the command: vidloop start"
+echo "FINISHED INSTALLATION: Service control -> /etc/init.d/vid_controller {start|stop|check|repair}"
