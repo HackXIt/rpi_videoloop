@@ -1,9 +1,10 @@
+#!/bin/bash
 # This script plays the videos in the VPATH directory in a loop
 
 # Path of the directory containing the videos
 VPATH="/media/"
 # Variable für vorhandene videofiles in angesteckten USB-Sticks
-ENTRIES=$(find $VPATH | grep .mp4)
+ENTRIES=$(find $VPATH | grep -e .avi -e .mov -e .mkv -e .mp4 -e .m4v)
 
 # Loop through each file in VPATH until stopped
 
