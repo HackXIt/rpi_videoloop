@@ -14,6 +14,7 @@ if ! [ apt list $DEPENDENCIES | grep -v installed | grep -E 'omxplayer|screen|cr
 then
 echo "Dependencies already installed. Continuing."
 else
+echo "Installing dependencies."
 apt-get update
 apt-get install $DEPENDENCIES -y
 fi
