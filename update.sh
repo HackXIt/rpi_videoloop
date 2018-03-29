@@ -9,17 +9,17 @@ USBCONF="usbmount.conf"
 git pull origin master
 
 #Removing existing installation
-if [ -f $INIT/$CONTROLLER]; then
+if [ -f $INIT/$CONTROLLER ] ; then
     cp $CONTROLLER $INIT/
 else
     echo "No init.d config found."
 fi
-if [ -f $PATH/$SCRIPT]; then
+if [ -f $PATH/$SCRIPT ] ; then
     cp $SCRIPT $PATH
 else
     echo "No script found."
 fi
-if [ -f /etc/usbmount/$USBCONF]; then
+if [ -f /etc/usbmount/$USBCONF ] ; then
     cp $USBCONF /etc/usbmount
 else
     echo "No usbmount config found."

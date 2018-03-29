@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Variables
-DEPENDENCIES="omxplayer screen cron usbmount"
+DEPENDENCIES="omxplayer screen cron usbmount ntfs-3g"
 PATH="/home/pi/rpi_videoloop"
 INIT="/etc/init.d"
 SCRIPT="videoloop_v2.sh"
