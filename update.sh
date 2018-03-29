@@ -1,6 +1,6 @@
-#!/bin/bash
+#! /bin/bash
 
-PATH="/home/pi/rpi_videoloop"
+PTH="/home/pi/rpi_videoloop"
 INIT="/etc/init.d"
 SCRIPT="videoloop_v2.sh"
 CONTROLLER="vid_controller"
@@ -14,8 +14,8 @@ if [ -f $INIT/$CONTROLLER ] ; then
 else
     echo "No init.d config found."
 fi
-if [ -f $PATH/$SCRIPT ] ; then
-    cp $SCRIPT $PATH
+if [ -f $PTH/$SCRIPT ] ; then
+    cp $SCRIPT $PTH
 else
     echo "No script found."
 fi

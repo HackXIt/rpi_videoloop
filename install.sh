@@ -2,7 +2,7 @@
 
 #Variables
 DEPENDENCIES="omxplayer screen cron usbmount ntfs-3g"
-PATH="/home/pi/rpi_videoloop"
+PTH="/home/pi/rpi_videoloop"
 INIT="/etc/init.d"
 SCRIPT="videoloop_v2.sh"
 CONTROLLER="vid_controller"
@@ -22,15 +22,15 @@ fi
 echo "Installing Configurations..."
 
 #Configuring
-if [ ! -d "$PATH" ]; then 
-    mkdir $PATH
+if [ ! -d "$PTH" ]; then 
+    mkdir $PTH
 fi
-cp $SCRIPT $PATH
+cp $SCRIPT $PTH
 if [ ! -f $INIT/$CONTROLLER ]; then
     sudo cp $CONTROLLER $INIT
 fi
 cp $USBCONF /etc/usbmount/
-sudo chmod 755 $PATH/$SCRIPT
+sudo chmod 755 $PTH/$SCRIPT
 sudo chmod 755 $INIT/$CONTROLLER
 sudo update-rc.d $CONTROLLER defaults
 sudo echo -n " consoleblank=10" >> /boot/cmdline.txt
