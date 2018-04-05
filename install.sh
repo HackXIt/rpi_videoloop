@@ -10,7 +10,7 @@ USBCONF="usbmount.conf"
 CRONSTUFF=$(cat cron.txt)
 
 # Checking | Installing Dependancies
-if ! apt list "$DEPENDENCIES" | grep -v installed | grep -E 'omxplayer|screen|cron|usbmount|' > /dev/null
+if ! apt list "$DEPENDENCIES" | grep -v installed | grep -E 'omxplayer|screen|cron|usbmount|ntfs-3g' > /dev/null
 then
 echo "Dependencies already installed. Continuing."
 else
