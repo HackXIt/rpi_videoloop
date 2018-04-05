@@ -10,13 +10,13 @@ USBCONF="usbmount.conf"
 CRONSTUFF=$(cat cron.txt)
 
 # Checking | Installing Dependancies
-if ! [ apt list $DEPENDENCIES | grep -v installed | grep -E 'omxplayer|screen|cron|usbmount' > /dev/null ]
+if ! apt list "$DEPENDENCIES" | grep -v installed | grep -E 'omxplayer|screen|cron|usbmount|' > /dev/null
 then
 echo "Dependencies already installed. Continuing."
 else
 echo "Installing dependencies."
 apt-get update
-apt-get install $DEPENDENCIES -y
+apt-get install "$DEPENDENCIES" -y
 fi
 
 echo "Installing Configurations..."
@@ -33,7 +33,7 @@ cp $USBCONF /etc/usbmount/
 sudo chmod 755 $PTH/$SCRIPT
 sudo chmod 755 $INIT/$CONTROLLER
 sudo update-rc.d $CONTROLLER defaults
-sudo echo -n " consoleblank=10" >> /boot/cmdline.txt
+sudo echo -n " consoleblank=10" | sudo tee -a /boot/cmdline.txt
 #cat alias.txt >> ~/.bashrc
 #sudo cat alias.txt >> ~/.bashrc
 (crontab -u pi -l; echo "$CRONSTUFF" ) | crontab -u pi -
