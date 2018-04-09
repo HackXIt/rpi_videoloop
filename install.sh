@@ -21,13 +21,13 @@ USBDIR="/etc/usbmount/"
 CRONTEXT=$(< cron.txt)
 
 # Checking | Installing Dependancies
-if ! apt list "${DEPENDENCIES[*]}" | grep -v installed | grep -E "${DEPENDENCIES[@]// /|}" > /dev/null
+if apt list "${DEPENDENCIES[@]}" | grep -v installed | grep -E "${DEPENDENCIES[@]// /|}" > /dev/null
 then
 echo "Dependencies already installed. Continuing."
 else
 echo "Installing dependencies."
 apt-get update
-apt-get install "${DEPENDENCIES[*]}" -y
+apt-get install "${DEPENDENCIES[@]}" -y
 fi
 
 echo "Installing Configurations..."
