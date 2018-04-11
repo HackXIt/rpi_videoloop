@@ -18,8 +18,7 @@ else
 for entry in $ENTRIES
 do
 clear
-omxplayer -r $entry > /dev/null
+omxplayer -r "$entry" > /dev/null
 done
 fi
 done
-
