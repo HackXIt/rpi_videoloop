@@ -5,12 +5,13 @@
 VPATH="/media/"
 # Variable für vorhandene videofiles in angesteckten USB-Sticks
 ENTRIES=$(find $VPATH | grep -e .avi -e .mov -e .mkv -e .mp4 -e .m4v)
+PLAYER="omxplayer"
 
 # Loop through each file in VPATH until stopped
 
 while true; do
 #WENN omxplayer in Prozessliste vorhanden -> Nichtstun
-if ps ax | grep -v grep | grep omxplayer > /dev/null
+if pgrep -f "$PLAYER" > /dev/null
 then
 sleep 1;
 #WENN NICHT dann spiele videos von USB ab
