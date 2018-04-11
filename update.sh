@@ -8,7 +8,7 @@ USBCONF="usbmount.conf"
 
 git pull origin master
 
-#Removing existing installation
+#Replacing existing installation files if existing
 if [ -f $INIT/$CONTROLLER ] ; then
     cp $CONTROLLER $INIT/
 else
