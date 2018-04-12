@@ -15,7 +15,7 @@ set -A DEPENDENCIES "omxplayer" "screen" "cron" "usbmount" "ntfs-3g"
 DEPENDMET=0
 DESTDIR="/home/pi/rpi_videoloop/"
 INIT="/etc/init.d/"
-SCRIPT="videoloop_v2.sh"
+SCRIPT="videoloop.sh"
 CONTROLLER="vid_controller"
 USBCONF="usbmount.conf"
 USBDIR="/etc/usbmount/"
