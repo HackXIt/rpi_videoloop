@@ -35,6 +35,9 @@ else
   echo "Installing dependencies."
   apt-get update
   apt-get install "${DEPENDENCIES[@]}" -y "$1"
+  if [ "$1" ]; then
+    exit 1
+  fi
 fi
 
 echo "Installing Configurations..."
