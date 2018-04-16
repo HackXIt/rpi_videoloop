@@ -12,7 +12,6 @@ fi
 DEPENDENCIES=("omxplayer" "screen" "cron" "usbmount" "ntfs-3g")
 
 #Variables
-DEPENDMET=0
 DESTDIR="/home/pi/rpi_videoloop/"
 INIT="/etc/init.d/"
 SCRIPT="videoloop.sh"
@@ -22,24 +21,13 @@ USBDIR="/etc/usbmount/"
 CRONTEXT=$(< cron.txt)
 
 # Checking | Installing Dependancies
-for dependency in "${DEPENDENCIES[@]}"; do
-  apt list "$dependency" | grep -v installed
-  if [ $? -eq 0 ]; then
-    ((DEPENDMET++))
-  fi
-done
+echo "Installing dependencies."
+apt-get install "${DEPENDENCIES[@]}" -y "$1" # Will exit immidiatly if failed due to Line 2
 
-if [ ! $DEPENDMET -gt 0 ]; then
-  echo "Dependencies already installed. Continuing."
-else
-  echo "Installing dependencies."
-  apt-get update
-  apt-get install "${DEPENDENCIES[@]}" -y "$1"
-  if [ "$1" ]; then
+#Exit if --dry-run or else
+if [ "$1" ]; then
     exit 1
   fi
-fi
-
 echo "Installing Configurations..."
 
 #Configuring
