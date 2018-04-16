@@ -25,7 +25,7 @@ CRONTEXT=$(< cron.txt)
 for dependency in "${DEPENDENCIES[@]}"; do
   apt list "$dependency" | grep -v installed
   if [ $? -eq 0 ]; then
-    $DEPENDMET + 1
+    ((DEPENDMET++))
   fi
 done
 
