@@ -9,7 +9,7 @@ then
    exit 1
 fi
 
-set -A DEPENDENCIES "omxplayer" "screen" "cron" "usbmount" "ntfs-3g"
+DEPENDENCIES=("omxplayer" "screen" "cron" "usbmount" "ntfs-3g")
 
 #Variables
 DEPENDMET=0
@@ -22,7 +22,7 @@ USBDIR="/etc/usbmount/"
 CRONTEXT=$(< cron.txt)
 
 # Checking | Installing Dependancies
-for dependency in $DEPENDENCIES; do
+for dependency in "${DEPENDENCIES[@]}"; do
   apt list "$dependency" | grep -v installed
   if [ $? -eq 0 ]; then
     $DEPENDMET + 1
@@ -34,7 +34,7 @@ if [ ! $DEPENDMET -gt 0 ]; then
 else
   echo "Installing dependencies."
   apt-get update
-  apt-get install "$DEPENDENCIES" -y
+  apt-get install "${DEPENDENCIES[@]}" -y
 fi
 
 echo "Installing Configurations..."
