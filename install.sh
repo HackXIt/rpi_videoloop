@@ -34,7 +34,7 @@ if [ ! $DEPENDMET -gt 0 ]; then
 else
   echo "Installing dependencies."
   apt-get update
-  apt-get install "${DEPENDENCIES[@]}" -y
+  apt-get install "${DEPENDENCIES[@]}" -y "$1"
 fi
 
 echo "Installing Configurations..."
