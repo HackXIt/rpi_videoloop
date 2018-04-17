@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -eu
 
 if ! test $UID -eq 0
@@ -22,12 +23,16 @@ CRONTEXT=$(< cron.txt)
 
 # Checking | Installing Dependancies
 echo "Installing dependencies."
-apt-get install "${DEPENDENCIES[@]}" -y "$1" # Will exit immidiatly if failed due to Line 2
+if [ "$1" ]; then
+    apt-get install "${DEPENDENCIES[@]}"
+else
+    apt-get install "${DEPENDENCIES[@]}" "$1" # Will exit immidiatly if failed due to Line 2^
+fi
 
 #Exit if --dry-run or else
-if [ "$1" ]; then
+if [ "$1" == "--dry-run" ]; then
     exit 1
-  fi
+fi
 echo "Installing Configurations..."
 
 #Configuring
