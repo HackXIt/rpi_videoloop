@@ -14,6 +14,8 @@ The install script attempts to install the following packages if not already ins
 * cron
 * ntfs-3g
 
+Another requirement is Raspbian Jessie. On the latest raspbian stretch or in stretch in general the usbmount package doesn't work as intended anymore, therefor raspbian jessie is required for this script to work, at least until I've found a decent alternative.
+
 -----
 
 Installation:
