@@ -24,7 +24,7 @@ CRONTEXT=$(< cron.txt)
 # Checking | Installing Dependancies
 echo "Installing dependencies."
 if [ "$#" ]; then
-    apt-get install "${DEPENDENCIES[@]}"
+    apt-get install "${DEPENDENCIES[@]}" -y
 else
     apt-get install "${DEPENDENCIES[@]}" "$1" # Will exit immidiatly if failed due to Line 2^
 fi
