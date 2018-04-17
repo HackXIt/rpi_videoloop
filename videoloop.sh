@@ -10,17 +10,17 @@ PLAYER="omxplayer"
 # Loop through each file in VPATH until stopped
 
 while true; do
-#WENN omxplayer in Prozessliste vorhanden -> Nichtstun
-pgrep -f "$PLAYER" > /dev/null
-if [ $? -eq 0 ]
-then
-sleep 1;
-#WENN NICHT dann spiele videos von USB ab
-else
-for entry in $ENTRIES
-do
-clear
-omxplayer -r "$entry" > /dev/null
-done
-fi
+	#WENN omxplayer in Prozessliste vorhanden -> Nichtstun
+	pgrep -f "$PLAYER" > /dev/null
+	if [ $? -eq 0 ]
+	then
+		sleep 1;
+	#WENN NICHT dann spiele videos von USB ab
+	else
+		for entry in $ENTRIES
+		do
+		clear
+		omxplayer -r "$entry" > /dev/null
+		done
+	fi
 done
