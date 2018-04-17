@@ -27,12 +27,9 @@ if [ "$#" ]; then
     apt-get install "${DEPENDENCIES[@]}" -y
 else
     apt-get install "${DEPENDENCIES[@]}" "$1" # Will exit immidiatly if failed due to Line 2^
+    exit 1  # Not supporting parameters for now
 fi
 
-#Exit if --dry-run or else
-if [ "$1" == "--dry-run" ]; then
-    exit 1
-fi
 echo "Installing Configurations..."
 
 #Configuring
