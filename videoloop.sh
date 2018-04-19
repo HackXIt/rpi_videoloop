@@ -12,8 +12,7 @@ PLAYER="omxplayer"
 while true; do
 	#WENN omxplayer in Prozessliste vorhanden -> Nichtstun
 	pgrep -f "$PLAYER" > /dev/null
-	if [ $? -eq 0 ]
-	then
+	if [ $? -eq 0 ]; then
 		sleep 1;
 	#WENN NICHT dann spiele videos von USB ab
 	else

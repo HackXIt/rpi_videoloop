@@ -43,8 +43,8 @@ fi
 install -t "$USBDIR" "$USBCONF"
 update-rc.d "$CONTROLLER" defaults
 printf " consoleblank=10" | sudo tee -a /boot/cmdline.txt
-#cat alias.txt >> ~/.bashrc
-#sudo cat alias.txt >> ~/.bashrc
+printf "\n%s\n" "$(< alias.txt)" >> /home/pi/.bashrc
+printf "\n%s\n" "$(< alias.txt)" >> /root/.bashrc
 (crontab -u pi -l; echo "$CRONTEXT" ) | crontab -u pi -
 
 echo "FINISHED INSTALLATION: Service control -> /etc/init.d/vid_controller {start|stop|check|repair}"
