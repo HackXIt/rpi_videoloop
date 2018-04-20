@@ -15,7 +15,7 @@ else
 fi
 if [ -e "$DESTDIR/$SCRIPT" ]; then
   cp "$SCRIPT" "$DESTDIR"
-  chown pi:pi "$DESTDIR$SCRIPT"
+  chown pi:pi "$DESTDIR/$SCRIPT"
 else
   echo "No script found, please use install.sh."
 fi
