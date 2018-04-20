@@ -37,6 +37,7 @@ if [ ! -d "$DESTDIR" ]; then
   install -d "$DESTDIR"
 fi
 install -t "$DESTDIR" "$SCRIPT"
+chown pi:pi "$DESTDIR$SCRIPT"
 if [ ! -f "$INIT$CONTROLLER" ]; then
   install -t "$INIT" "$CONTROLLER"
 fi

@@ -19,7 +19,7 @@ while true; do
 		for entry in $ENTRIES
 		do
 		clear
-		omxplayer -r "$entry" > /dev/null
+		omxplayer -r --no-osd -b "$entry"# > /dev/null
 		done
 	fi
 done
