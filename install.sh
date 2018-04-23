@@ -34,16 +34,18 @@ echo "Installing Configurations..."
 
 #Configuring
 if [ ! -d "$DESTDIR" ]; then 
-  install -d "$DESTDIR"
+  install --group=pi --owner=pi -d "$DESTDIR"
 fi
-install -t "$DESTDIR" "$SCRIPT"
-chown pi:pi "$DESTDIR$SCRIPT"
+install --group=pi --owner=pi -t "$DESTDIR" "$SCRIPT"
 if [ ! -f "$INIT$CONTROLLER" ]; then
-  install -t "$INIT" "$CONTROLLER"
+  install --group=pi --owner=pi -t "$INIT" "$CONTROLLER"
 fi
-install -t "$USBDIR" "$USBCONF"
+install --group=pi --owner=pi -t "$USBDIR" "$USBCONF"
 update-rc.d "$CONTROLLER" defaults
-printf " consoleblank=10" | sudo tee -a /boot/cmdline.txt
+cat /boot/cmdline.txt | grep consoleblank= >> /dev/null
+if [ ! "$?" -eq 0 ]; then
+  printf " consoleblank=10" | sudo tee -a /boot/cmdline.txt
+fi
 printf "\n%s\n" "$(< alias.txt)" >> /home/pi/.bashrc
 printf "\n%s\n" "$(< alias.txt)" >> /root/.bashrc
 (crontab -u pi -l; echo "$CRONTEXT" ) | crontab -u pi -
