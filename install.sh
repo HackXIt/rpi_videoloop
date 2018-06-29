@@ -48,6 +48,7 @@ if [ ! "$?" -eq 0 ]; then
 fi
 printf "\n%s\n" "$(< alias.txt)" >> /home/pi/.bashrc
 printf "\n%s\n" "$(< alias.txt)" >> /root/.bashrc
-(crontab -u pi -l; echo "$CRONTEXT" ) | crontab -u pi -
+#(crontab -u pi -l; echo "$CRONTEXT" ) | crontab -u pi -
+crontab -l | { cat; echo "$CRONTEXT"; } | crontab -
 
 echo "FINISHED INSTALLATION: Service control -> /etc/init.d/vid_controller {start|stop|check|repair}"
