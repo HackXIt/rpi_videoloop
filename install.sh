@@ -52,3 +52,4 @@ printf "\n%s\n" "$(< alias.txt)" >> /root/.bashrc
 crontab -l | { cat; echo "$CRONTEXT"; } | crontab -
 
 echo "FINISHED INSTALLATION: Service control -> /etc/init.d/vid_controller {start|stop|check|repair}"
+echo "or execute in terminal: videoloop {start|stop|check|repair}"
