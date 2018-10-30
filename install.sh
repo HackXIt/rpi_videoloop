@@ -42,7 +42,7 @@ if [ ! -f "$INIT$CONTROLLER" ]; then
 fi
 install --group=pi --owner=pi -t "$USBDIR" "$USBCONF"
 update-rc.d "$CONTROLLER" defaults
-if [ ! "$(cat < /boot/cmdline.txt | grep consoleblank= >> /dev/null)"]; then
+if [ ! "$(cat < /boot/cmdline.txt | grep consoleblank= >> /dev/null)" ]; then
   printf " consoleblank=10" | sudo tee -a /boot/cmdline.txt
 fi
 printf "\n%s\n" "$(< alias.txt)" >> /home/pi/.bashrc
