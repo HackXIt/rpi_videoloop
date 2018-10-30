@@ -48,7 +48,9 @@ fi
 #printf "\n%s\n" "$(< alias.txt)" >> /home/pi/.bashrc
 #printf "\n%s\n" "$(< alias.txt)" >> /root/.bashrc
 #(crontab -u pi -l; echo "$CRONTEXT" ) | crontab -u pi -
-crontab -l | { cat; echo "$CRONTEXT"; } | crontab -
+#crontab -l | { cat; echo "$CRONTEXT"; } | crontab -
+#Execute crontab twice to avoid "No crontab for user" message + sort | uniq to avoid creating duplicates
+( (crontab -l 2>/dev/null || echo "") ; echo "$CRONTEXT") | sort -u - | crontab -
 
 echo "FINISHED INSTALLATION: Service control -> /etc/init.d/vid_controller {start|stop|check|repair}"
 echo "or execute in terminal: videoloop {start|stop|check|repair}"
