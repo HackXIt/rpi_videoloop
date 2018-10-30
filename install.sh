@@ -42,11 +42,11 @@ if [ ! -f "$INIT$CONTROLLER" ]; then
 fi
 install --group=pi --owner=pi -t "$USBDIR" "$USBCONF"
 update-rc.d "$CONTROLLER" defaults
-if [ ! "$(cat < /boot/cmdline.txt | grep consoleblank= >> /dev/null)" ]; then
+if ! "cat < /boot/cmdline.txt | grep consoleblank= >> /dev/null"; then
   printf " consoleblank=10" | sudo tee -a /boot/cmdline.txt
 fi
-printf "\n%s\n" "$(< alias.txt)" >> /home/pi/.bashrc
-printf "\n%s\n" "$(< alias.txt)" >> /root/.bashrc
+#printf "\n%s\n" "$(< alias.txt)" >> /home/pi/.bashrc
+#printf "\n%s\n" "$(< alias.txt)" >> /root/.bashrc
 #(crontab -u pi -l; echo "$CRONTEXT" ) | crontab -u pi -
 crontab -l | { cat; echo "$CRONTEXT"; } | crontab -
 
