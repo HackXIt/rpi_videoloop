@@ -35,15 +35,22 @@ echo "Installing Configurations..."
 #Configuring
 if [ ! -d "$DESTDIR" ]; then 
   install --group=pi --owner=pi -d "$DESTDIR"
+  echo "Directory created..."
 fi
 install --group=pi --owner=pi -t "$DESTDIR" "$SCRIPT"
 if [ ! -f "$INIT$CONTROLLER" ]; then
   install --group=pi --owner=pi -t "$INIT" "$CONTROLLER"
+  echo "Init script installed..."
 fi
-install --group=pi --owner=pi -t "$USBDIR" "$USBCONF"
+if [ ! -f "$USBDIR$USBCONF" ]; then
+  install --group=pi --owner=pi -t "$USBDIR" "$USBCONF"
+  echo "Usbmount configuration installed..."
+fi
 update-rc.d "$CONTROLLER" defaults
+echo "Init.d updated..."
 if ! "cat /boot/cmdline.txt | grep consoleblank= >> /dev/null"; then
   printf " consoleblank=10" | sudo tee -a /boot/cmdline.txt
+  echo "cmdline.txt updated..."
 fi
 #printf "\n%s\n" "$(< alias.txt)" >> /home/pi/.bashrc
 #printf "\n%s\n" "$(< alias.txt)" >> /root/.bashrc
@@ -51,6 +58,11 @@ fi
 #crontab -l | { cat; echo "$CRONTEXT"; } | crontab -
 #Execute crontab twice to avoid "No crontab for user" message + sort | uniq to avoid creating duplicates
 ( (crontab -l 2>/dev/null || echo "") ; echo "$CRONTEXT") | sort -u - | crontab -
+echo "Crontab installed"
+if [ ! -f "/bin/videoloop" ]; then
+  ln -s "$INIT$CONTROLLER" -T /bin/videoloop
+  echo "Symbolic link / shortcut created..."
+fi
 
 echo "FINISHED INSTALLATION: Service control -> /etc/init.d/vid_controller {start|stop|check|repair}"
 echo "or execute in terminal: videoloop {start|stop|check|repair}"
