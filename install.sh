@@ -34,13 +34,19 @@ echo "Installing Configurations..."
 
 #Configuring
 if [ ! -d "$DESTDIR" ]; then 
+<<<<<<< HEAD
   install -d "$DESTDIR"
   echo "...directory installed..."
 else
   echo "...directory skipped..."
+=======
+  install --group=pi --owner=pi -d "$DESTDIR"
+  echo "Directory created..."
+>>>>>>> c6cdd5719802893c2266e5cee72ee42f2873e230
 fi
-install -t "$DESTDIR" "$SCRIPT"
+install --group=pi --owner=pi -t "$DESTDIR" "$SCRIPT"
 if [ ! -f "$INIT$CONTROLLER" ]; then
+<<<<<<< HEAD
   install -t "$INIT" "$CONTROLLER"
   echo "...init script installed..."
 else
@@ -55,5 +61,32 @@ printf " consoleblank=10" | sudo tee -a /boot/cmdline.txt
 #sudo cat alias.txt >> ~/.bashrc
 #Exec crontab twice to avoid "No crontab for user" / sort + uniq to avoid double entries
 ( (crontab -l 2>/dev/null || echo "")  ; echo "$CRONTEXT") | sort -u - | crontab -
+=======
+  install --group=pi --owner=pi -t "$INIT" "$CONTROLLER"
+  echo "Init script installed..."
+fi
+if [ ! -f "$USBDIR$USBCONF" ]; then
+  install --group=pi --owner=pi -t "$USBDIR" "$USBCONF"
+  echo "Usbmount configuration installed..."
+fi
+update-rc.d "$CONTROLLER" defaults
+echo "Init.d updated..."
+if ! "cat /boot/cmdline.txt | grep consoleblank= >> /dev/null"; then
+  printf " consoleblank=10" | sudo tee -a /boot/cmdline.txt
+  echo "cmdline.txt updated..."
+fi
+#printf "\n%s\n" "$(< alias.txt)" >> /home/pi/.bashrc
+#printf "\n%s\n" "$(< alias.txt)" >> /root/.bashrc
+#(crontab -u pi -l; echo "$CRONTEXT" ) | crontab -u pi -
+#crontab -l | { cat; echo "$CRONTEXT"; } | crontab -
+#Execute crontab twice to avoid "No crontab for user" message + sort | uniq to avoid creating duplicates
+( (crontab -l 2>/dev/null || echo "") ; echo "$CRONTEXT") | sort -u - | crontab -
+echo "Crontab installed"
+if [ ! -f "/bin/videoloop" ]; then
+  ln -s "$INIT$CONTROLLER" -T /bin/videoloop
+  echo "Symbolic link / shortcut created..."
+fi
+>>>>>>> c6cdd5719802893c2266e5cee72ee42f2873e230
 
 echo "FINISHED INSTALLATION: Service control -> /etc/init.d/vid_controller {start|stop|check|repair}"
+echo "or execute in terminal: videoloop {start|stop|check|repair}"

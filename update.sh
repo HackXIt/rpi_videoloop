@@ -1,27 +1,29 @@
 #! /bin/bash
 
-PTH="/home/pi/rpi_videoloop/"
-INIT="/etc/init.d/"
-SCRIPT="videoloop_v2.sh"
+DESTDIR="/home/pi/rpi_videoloop"
+INIT="/etc/init.d"
+SCRIPT="videoloop.sh"
 CONTROLLER="vid_controller"
 USBCONF="usbmount.conf"
-USBDIR="/etc/usbmount/"
-
-git pull origin master
+USBDIR="/etc/usbmount"
 
 #Replacing existing installation files if existing
-if [ -f "$INIT$CONTROLLER" ]; then
-  cp "$CONTROLLER $INIT"
+if [ -e "$INIT/$CONTROLLER" ]; then
+  cp "$CONTROLLER" "$INIT"
+  echo "Init.d Controller updated..."
 else
-  echo "No init.d config found."
+  echo "No init.d config found, please use install.sh."
 fi
-if [ -f "$PTH$SCRIPT" ]; then
-  cp "$SCRIPT $PTH"
+if [ -e "$DESTDIR/$SCRIPT" ]; then
+  cp "$SCRIPT" "$DESTDIR"
+  chown pi:pi "$DESTDIR/$SCRIPT"
+  echo "Script updated..."
 else
-  echo "No script found."
+  echo "No script found, please use install.sh."
 fi
-if [ -f $USBDIR$USBCONF ]; then
-	cp "$USBCONF $USBDIR"
+if [ -e "$USBDIR/$USBCONF" ]; then
+	cp "$USBCONF" "$USBDIR"
+  echo "Usbmount updated..."
 else
-	echo "No usbmount config found."
+	echo "No usbmount config found, please use install.sh."
 fi
